@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Ticket GUI</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .ticket { margin: 20px; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        .status { font-weight: bold; }
+        .button { margin: 5px; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
+        .buttons-container { margin-top: 10px; }
+        #statusDisplay { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="ticket">
+        <h2>AI Ticket Workflow</h2>
+        <div class="status">Current Stage: <span id="currentStage">1</span></div>
+        <div class="buttons-container">
+            <button class="button" onclick="moveStage(-1)">Previous</button>
+            <button class="button" onclick="moveStage(1)">Next</button>
+        </div>
+        <div id="statusDisplay"></div>
+    </div>
+
+    <script>
+        let stage = 1;
+        const totalStages = 10;
+        const statusMessages = [
+            'Stage 1: Ticket Created', 
+            'Stage 2: Ticket Assigned', 
+            'Stage 3: In Progress', 
+            'Stage 4: Under Review', 
+            'Stage 5: Awaiting Feedback', 
+            'Stage 6: Approved', 
+            'Stage 7: Implemented', 
+            'Stage 8: Testing', 
+            'Stage 9: Completed', 
+            'Stage 10: Closed'
+        ];
+
+        function moveStage(direction) {
+            if (stage + direction >= 1 && stage + direction <= totalStages) {
+                stage += direction;
+                updateDisplay();
+            }
+        }
+
+        function updateDisplay() {
+            document.getElementById('currentStage').innerText = stage;
+            document.getElementById('statusDisplay').innerText = statusMessages[stage - 1];
+        }
+
+        updateDisplay(); // Initialize display
+    </script>
+</body>
+</html>
